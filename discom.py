@@ -41,7 +41,7 @@ while True:
   if name == "Stop":
     break
   elif name in dd:
-    print ("%s:%s" % (dd[name], master[dd[name]]))
+    print ("%s: %s" % (dd[name], master[dd[name]]))
   else:
     banner = input ("Input a BannerID: ")
     if banner in ban:
@@ -51,10 +51,12 @@ while True:
     if dis_name in dd.values():
       dis_name = get_full_name()
     dd[name] = dis_name
-    dis_banner = "%0.12d" % random.randint(0,999999999)
+    dis_banner = "%0.9d" % random.randint(0,999999)
     if dis_banner in ban.values():
-      dis_banner = "%0.12d" % random.randint(0,999999999)
+      dis_banner = "%0.9d" % random.randint(0,999999)
     ban[banner] = dis_banner
     master[dis_name] = dis_banner
+    print("\nAvailable discombobulated identities:")
     for keys,values in master.items():
-        print("%s:%s" % (keys,values))
+        print("%s: %s" % (keys,values))
+    print("\n")
