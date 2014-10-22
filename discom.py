@@ -1,14 +1,6 @@
 #!/usr/bin/python
 from os.path import abspath, join, dirname
 import random
-
-
-__title__ = 'names'
-__version__ = '0.2'
-__author__ = 'Trey Hunner'
-__license__ = 'MIT'
-
-
 full_path = lambda filename: abspath(join(dirname(__file__), filename))
 
 
@@ -40,19 +32,29 @@ def get_last_name():
 
 def get_full_name(gender=None):
     return u"%s %s" % (get_first_name(gender), get_last_name())
-    
-name = input ("Input a name: ")
-dis_name = get_full_name()
+
 dd = {}
-dd[name] = dis_name
-print(dd[name])
+ban = {}
+master = {}
 while True:
   name = input ("Input a name: ")
-  if name in dd:
-    print (dd[name])
+  if name == "Stop":
+    break
+  elif name in dd:
+    print ("%s:%s" % (dd[name], master[dd[name]]))
   else:
+    banner = input ("Input a BannerID: ")
+    if banner in ban:
+      print (ban[banner])
+      continue
     dis_name = get_full_name()
     if dis_name in dd.values():
       dis_name = get_full_name()
     dd[name] = dis_name
-    print(dd[name])
+    dis_banner = "%0.12d" % random.randint(0,999999999)
+    if dis_banner in ban.values():
+      dis_banner = "%0.12d" % random.randint(0,999999999)
+    ban[banner] = dis_banner
+    master[dis_name] = dis_banner
+    for keys,values in master.items():
+        print("%s:%s" % (keys,values))
