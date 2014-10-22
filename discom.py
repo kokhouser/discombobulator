@@ -52,5 +52,7 @@ while True:
     print (dd[name])
   else:
     dis_name = get_full_name()
+    if dis_name in dd.values():
+      dis_name = get_full_name()
     dd[name] = dis_name
     print(dd[name])
