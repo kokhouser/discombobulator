@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from os.path import abspath, join, dirname
 import random
+import csv
 full_path = lambda filename: abspath(join(dirname(__file__), filename))
 
 
@@ -33,20 +34,31 @@ def get_last_name():
 def get_full_name(gender=None):
     return u"%s %s" % (get_first_name(gender), get_last_name())
 
+name_input = []
+banner_input = []
+f = open('filename.csv', 'rU')
+for line in f:
+    cells = line.split(",")
+    name_input.append(cells[0])
+    banner_input.append(cells[1])
+f.close()
 dd = {}
 ban = {}
 master = {}
-while True:
-  name = input ("Input a name: ")
-  if name == "Stop":
-    break
-  elif name in dd:
-    print ("%s: %s" % (dd[name], master[dd[name]]))
+for x in range(0,len(banner_input)):
+  name = name_input[x]
+  dis_name = name
+  dis_banner = 0
+  if name in dd:
+    dis_name = dd[name]
+    #print ("%s: %s" % (dd[name], master[dd[name]]))
+  banner = banner_input[x]
+  if banner in ban:
+    dis_banner = ban[banner]
+    #for old_name, old_banner in master.items():
+        #if dis_banner == old_banner:
+            #dis_name = old_name
   else:
-    banner = input ("Input a BannerID: ")
-    if banner in ban:
-      print (ban[banner])
-      continue
     dis_name = get_full_name()
     if dis_name in dd.values():
       dis_name = get_full_name()
@@ -54,9 +66,11 @@ while True:
     dis_banner = "%0.9d" % random.randint(0,999999)
     if dis_banner in ban.values():
       dis_banner = "%0.9d" % random.randint(0,999999)
-    ban[banner] = dis_banner
-    master[dis_name] = dis_banner
-    print("\nAvailable discombobulated identities:")
-    for keys,values in master.items():
-        print("%s: %s" % (keys,values))
-    print("\n")
+  ban[banner] = dis_banner
+  master[dis_name] = dis_banner
+print("\nAvailable discombobulated identities:")
+writer = csv.writer(open('newcsv.csv', 'w', newline=''))
+for keys,values in master.items():
+  print("%s: %s" % (keys,values))
+  print("\n")
+  writer.writerow([keys, values])
