@@ -36,7 +36,7 @@ def get_full_name(gender=None):
 
 name_input = []
 banner_input = []
-f = open('filename.csv', 'rU')
+f = open('filename2.csv', 'rU')
 for line in f:
     cells = line.split(",")
     name_input.append(cells[0])
@@ -45,6 +45,7 @@ f.close()
 dd = {}
 ban = {}
 master = {}
+'''
 for x in range(0,len(banner_input)):
   name = name_input[x]
   dis_name = name
@@ -68,9 +69,32 @@ for x in range(0,len(banner_input)):
       dis_banner = "%0.9d" % random.randint(0,999999)
   ban[banner] = dis_banner
   master[dis_name] = dis_banner
-print("\nAvailable discombobulated identities:")
+'''
 writer = csv.writer(open('newcsv.csv', 'w', newline=''))
+for x in range (0, len(banner_input)):
+    name = name_input[x]
+    banner = banner_input[x]
+    dis_name = name
+    dis_banner = 0
+    if banner in ban:
+        dis_banner = ban[banner]
+        for key, value in master.items():
+            if dis_banner == value:
+                dis_name = key
+    else:
+        dis_name = get_full_name()
+        if dis_name in dd.values():
+            dis_name = get_full_name()
+        dd[name] = dis_name
+        dis_banner = "%0.9d" % random.randint(0,999999)
+        if dis_banner in ban.values():
+            dis_banner = "%0.9d" % random.randint(0,999999)
+        ban[banner] = dis_banner
+    master[dis_name] = dis_banner
+    writer.writerow([dis_name,dis_banner])
+
+print("\nAvailable discombobulated identities:")
 for keys,values in master.items():
   print("%s: %s" % (keys,values))
   print("\n")
-  writer.writerow([keys, values])
+    
