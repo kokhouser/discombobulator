@@ -41,7 +41,8 @@ bd_input = []
 class_input = []
 address_input = []
 #change the following for different input files
-f = open('newcsv2.csv', 'rU')
+input = input("Enter input csv: ")
+f = open(input, 'rU')
 for line in f:
     cells = line.split(",")
     name_input.append(cells[0])
@@ -56,8 +57,7 @@ ban = {}
 master = {}
 #change the following for different output files
 writer = csv.writer(open('newcsv.csv', 'w', newline=''))
-#for x in range (0, len(banner_input)):
-for x in range (0, 100):
+for x in range (0, len(banner_input)):
     name = name_input[x]
     banner = banner_input[x]
     dis_name = name
@@ -82,8 +82,8 @@ for x in range (0, 100):
     #writer.writerow([dis_name,dis_banner,bd_input[x],class_input[x],address_input[x]])
     writer.writerow([dis_name,dis_banner])
 
-print("\nAvailable discombobulated identities:")
-for keys,values in master.items():
-  print("%s: %s" % (keys,values))
-  print("\n")
+#print("\nAvailable unique discombobulated identities:")
+#for keys,values in master.items():
+#  print("%s: %s" % (keys,values))
+#  print("\n")
     
