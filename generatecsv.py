@@ -39,7 +39,7 @@ dd = {}
 ban = {}
 master = {}
 writer = csv.writer(open('newcsv2.csv', 'w', newline=''))
-for x in range (0, 4000):
+for x in range (0, 100):
     dis_banner = "%0.9d" % random.randint(0,999999)
     dis_name = ''
     if dis_banner in ban:

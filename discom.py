@@ -37,21 +37,27 @@ def get_full_name(gender=None):
 #Code for discombobulation
 name_input = []
 banner_input = []
-#bd_input = []
-#class_input = []
+bd_input = []
+class_input = []
+address_input = []
+#change the following for different input files
 f = open('newcsv2.csv', 'rU')
 for line in f:
     cells = line.split(",")
     name_input.append(cells[0])
     banner_input.append(cells[1])
+    #add other collumns here.
     #bd_input.append(cells[2])
     #class_input.append(cells[3])
+    #address_input.append(cells[4].rstrip('\n'))
 f.close()
 dd = {}
 ban = {}
 master = {}
+#change the following for different output files
 writer = csv.writer(open('newcsv.csv', 'w', newline=''))
-for x in range (0, len(banner_input)):
+#for x in range (0, len(banner_input)):
+for x in range (0, 100):
     name = name_input[x]
     banner = banner_input[x]
     dis_name = name
@@ -72,7 +78,8 @@ for x in range (0, len(banner_input)):
             dis_banner = "%0.9d" % random.randint(0,999999)
         ban[banner] = dis_banner
     master[dis_name] = dis_banner
-    #writer.writerow([dis_name,dis_banner,bd_input[x],class_input[x]])
+    #change this for collumns
+    #writer.writerow([dis_name,dis_banner,bd_input[x],class_input[x],address_input[x]])
     writer.writerow([dis_name,dis_banner])
 
 print("\nAvailable discombobulated identities:")
