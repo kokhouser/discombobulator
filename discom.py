@@ -38,26 +38,32 @@ def get_full_name(gender=None):
 #Code for discombobulation
 name_input = []
 banner_input = []
-bd_input = []
-class_input = []
-address_input = []
+records = []
+#change the following for different output files
+writer = csv.writer(open('newcsv.csv', 'wb'))
 #change the following for different input files
 f = sys.stdin.readlines()
+#147 columns in csv
+headers = []
 #f = open(input, 'rU')
-for line in f:
+for linenum, line in enumerate(f):
     cells = line.split(",")
-    name_input.append(cells[0])
-    banner_input.append(cells[1])
-    #add other collumns here.
-    #bd_input.append(cells[2])
-    #class_input.append(cells[3])
-    #address_input.append(cells[4].rstrip('\n'))
+    if linenum != 0:
+        records.append(cells)
+        fname = records[linenum-1][58]
+        lname = records[linenum-1][59]
+        mname = records[linenum-1][60]
+        name_input.append(fname + ' ' + mname + ' ' + lname)
+        banner_input.append(records[linenum-1][57])
+        records[linenum-1][147] = (records[linenum-1][147]).rstrip('\n')
+    else:
+        for x in range (0, len(cells)):
+            headers.append(cells[x].rstrip('\n'))
 #f.close()
 dd = {}
 ban = {}
 master = {}
-#change the following for different output files
-writer = csv.writer(open('newcsv.csv', 'w', newline=''))
+writer.writerow(headers)
 for x in range (0, len(banner_input)):
     name = name_input[x]
     banner = banner_input[x]
@@ -69,7 +75,7 @@ for x in range (0, len(banner_input)):
             if dis_banner == value:
                 dis_name = key
     else:
-        dis_name = get_full_name()
+        dis_name = get_first_name() + ' ' + get_first_name() + ' ' + get_last_name()
         #Not necessary unless we really want to have totally unique names (runtime increases a lot)
         #if dis_name in dd.values():
         #    dis_name = get_full_name()
@@ -81,7 +87,12 @@ for x in range (0, len(banner_input)):
     master[dis_name] = dis_banner
     #change this for collumns
     #writer.writerow([dis_name,dis_banner,bd_input[x],class_input[x],address_input[x]])
-    writer.writerow([dis_name,dis_banner])
+    broken_name = dis_name.split(" ")
+    records[x][57] = broken_name[0]
+    records[x][58] = broken_name [2]
+    records[x][59] = broken_name[1]
+    records[x][56] = dis_banner
+    writer.writerow(records[x])
 
 #print("\nAvailable unique discombobulated identities:")
 #for keys,values in master.items():
