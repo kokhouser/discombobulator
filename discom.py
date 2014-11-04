@@ -2,6 +2,7 @@
 from os.path import abspath, join, dirname
 import random
 import csv
+import sys
 full_path = lambda filename: abspath(join(dirname(__file__), filename))
 
 #Code for name randomization
@@ -41,8 +42,8 @@ bd_input = []
 class_input = []
 address_input = []
 #change the following for different input files
-input = input("Enter input csv: ")
-f = open(input, 'rU')
+f = sys.stdin.readlines()
+#f = open(input, 'rU')
 for line in f:
     cells = line.split(",")
     name_input.append(cells[0])
@@ -51,7 +52,7 @@ for line in f:
     #bd_input.append(cells[2])
     #class_input.append(cells[3])
     #address_input.append(cells[4].rstrip('\n'))
-f.close()
+#f.close()
 dd = {}
 ban = {}
 master = {}
