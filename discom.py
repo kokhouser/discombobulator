@@ -90,10 +90,10 @@ for x in range (0, len(banner_input)):
     #change this for collumns
     #writer.writerow([dis_name,dis_banner,bd_input[x],class_input[x],address_input[x]])
     broken_name = dis_name.split(" ")
-    records[x][57] = broken_name[0]
-    records[x][58] = broken_name [2]
-    records[x][59] = broken_name[1]
-    records[x][56] = dis_banner
+    records[x][58] = broken_name[0]
+    records[x][59] = broken_name [2]
+    records[x][60] = broken_name[1]
+    records[x][57] = dis_banner
     str2 = ",".join(records[x])
     print str2
     #writer.writerow(records[x])
