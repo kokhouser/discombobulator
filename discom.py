@@ -94,6 +94,7 @@ for x in range (0, len(banner_input)):
     records[x][59] = broken_name [2]
     records[x][60] = broken_name[1]
     records[x][57] = dis_banner
+    records[x][63] = broken_name[0]
     records[x][65] = broken_name[0].lower() + broken_name [2].lower() + "@acu.edu"
     str2 = ",".join(records[x])
     print str2
