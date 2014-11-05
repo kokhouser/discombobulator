@@ -40,7 +40,7 @@ name_input = []
 banner_input = []
 records = []
 #change the following for different output files
-writer = csv.writer(open('newcsv.csv', 'wb'))
+#writer = csv.writer(open('newcsv.csv', 'wb'))
 #change the following for different input files
 f = sys.stdin.readlines()
 #147 columns in csv
@@ -63,7 +63,9 @@ for linenum, line in enumerate(f):
 dd = {}
 ban = {}
 master = {}
-writer.writerow(headers)
+#writer.writerow(headers)
+str1 = ",".join(headers)
+print (str1)
 for x in range (0, len(banner_input)):
     name = name_input[x]
     banner = banner_input[x]
@@ -92,7 +94,9 @@ for x in range (0, len(banner_input)):
     records[x][58] = broken_name [2]
     records[x][59] = broken_name[1]
     records[x][56] = dis_banner
-    writer.writerow(records[x])
+    str2 = ",".join(records[x])
+    print str2
+    #writer.writerow(records[x])
 
 #print("\nAvailable unique discombobulated identities:")
 #for keys,values in master.items():
