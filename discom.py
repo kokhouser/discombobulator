@@ -96,6 +96,14 @@ for x in range (0, len(banner_input)):
     records[x][57] = dis_banner
     records[x][63] = broken_name[0]
     records[x][65] = broken_name[0].lower() + broken_name [2].lower() + "@acu.edu"
+    records[x][123] = "0"
+    records[x][124] = "0"
+    records[x][125] = "0"
+    records[x][126] = "0"
+    records[x][127] = "0"
+    records[x][128] = "0"
+    records[x][146] = "6"
+    records[x][147] = "Unknown"
     str2 = ",".join(records[x])
     print str2
     #writer.writerow(records[x])
