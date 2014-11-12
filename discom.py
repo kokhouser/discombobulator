@@ -40,13 +40,28 @@ name_input = []
 banner_input = []
 records = []
 #change the following for different output files
-#writer = csv.writer(open('newcsv.csv', 'wb'))
+writer = csv.writer(sys.stdout)
 #change the following for different input files
 f = sys.stdin.readlines()
+reader = csv.reader(f)
+rownum = 0
+for row in reader:
+    if rownum == 0:
+        header = row
+    else:
+        records.append(row)
+        fname = records[rownum-1][57]
+        lname = records[rownum-1][58]
+        mname = records[rownum-1][59]
+        name_input.append(fname + ' ' + mname + ' ' + lname)
+        banner_input.append(records[rownum-1][56])
+    rownum += 1        
 #147 columns in csv
-headers = []
+writer.writerow(header)
+
 #f = open(input, 'rU')
-for linenum, line in enumerate(f):
+'''
+for linenum, line in enumerate(reader):
     cells = line.split(",")
     final_line = len(cells)
     if linenum != 0:
@@ -62,12 +77,15 @@ for linenum, line in enumerate(f):
         for x in range (0, len(cells)):
             headers.append(cells[x].rstrip('\n'))
 #f.close()
+'''
+
+
 dd = {}
 ban = {}
 master = {}
 #writer.writerow(headers)
-str1 = ",".join(headers)
-print (str1)
+#str1 = ",".join(headers)
+#print (str1)
 for x in range (0, len(banner_input)):
     name = name_input[x]
     banner = banner_input[x]
@@ -91,29 +109,27 @@ for x in range (0, len(banner_input)):
     master[dis_name] = dis_banner
     #change this for collumns
     #writer.writerow([dis_name,dis_banner,bd_input[x],class_input[x],address_input[x]])
+    final_cell = len(records[x])
     broken_name = dis_name.split(" ")
-    records[x][58] = broken_name[0]
-    records[x][59] = broken_name [2]
-    records[x][60] = broken_name[1]
-    records[x][57] = dis_banner
-    records[x][63] = broken_name[0]
-    records[x][65] = broken_name[0].lower() + broken_name [2].lower() + "@acu.edu"
+    records[x][57] = broken_name[0]
+    records[x][58] = broken_name [2]
+    records[x][59] = broken_name[1]
+    records[x][56] = dis_banner
+    records[x][62] = broken_name[0]
+    records[x][64] = broken_name[0].lower() + broken_name [2].lower() + "@acu.edu"
     records[x][123] = "0"
     records[x][124] = "0"
     records[x][125] = "0"
     records[x][126] = "0"
     records[x][127] = "0"
-    records[x][128] = "0"
-    records[x][146] = "6"
-    final_cell = len(records[x])
+    records[x][122] = "0"
+    records[x][final_cell-2] = "6"
     #records[x][147] = (records[x][147]).rstrip('\n')
     records[x][final_cell-1] = "Unknown"
-    str2 = ",".join(records[x])
-    print str2
-    #writer.writerow(records[x])
+    #str2 = ",".join(records[x])
+    writer.writerow(records[x])
 
 #print("\nAvailable unique discombobulated identities:")
 #for keys,values in master.items():
 #  print("%s: %s" % (keys,values))
 #  print("\n")
-    
