@@ -48,6 +48,7 @@ headers = []
 #f = open(input, 'rU')
 for linenum, line in enumerate(f):
     cells = line.split(",")
+    final_line = len(cells)
     if linenum != 0:
         records.append(cells)
         fname = records[linenum-1][58]
@@ -55,7 +56,8 @@ for linenum, line in enumerate(f):
         mname = records[linenum-1][60]
         name_input.append(fname + ' ' + mname + ' ' + lname)
         banner_input.append(records[linenum-1][57])
-        records[linenum-1][147] = (records[linenum-1][147]).rstrip('\n')
+        if linenum == (final_line-1):
+            records[linenum-1][147] = (records[linenum-1][147]).rstrip('\n')
     else:
         for x in range (0, len(cells)):
             headers.append(cells[x].rstrip('\n'))
@@ -103,7 +105,9 @@ for x in range (0, len(banner_input)):
     records[x][127] = "0"
     records[x][128] = "0"
     records[x][146] = "6"
-    records[x][147] = "Unknown"
+    final_cell = len(records[x])
+    #records[x][147] = (records[x][147]).rstrip('\n')
+    records[x][final_cell-1] = "Unknown"
     str2 = ",".join(records[x])
     print str2
     #writer.writerow(records[x])
